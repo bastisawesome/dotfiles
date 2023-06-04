@@ -1,7 +1,7 @@
 {
 	"aururl": "https://aur.archlinux.org",
 	"buildDir": "/home/bast/.cache/yay",
-	"editor": "nano",
+	"editor": "nvim",
 	"editorflags": "",
 	"makepkgbin": "makepkg",
 	"makepkgconf": "",
@@ -39,7 +39,7 @@
 	"editmenu": false,
 	"combinedupgrade": false,
 	"useask": false,
-	"batchinstall": false,
+	"batchinstall": true,
 	"singlelineresults": false,
 	"separatesources": true,
 	"version": "11.3.0"
