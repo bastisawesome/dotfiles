@@ -1,8 +1,0 @@
-2023/06/04-11:16:13.597 3 Reusing MANIFEST /home/bast/.config/chromium/Default/Local Storage/leveldb/MANIFEST-000001
-2023/06/04-11:16:13.601 3 Recovering log #38
-2023/06/04-11:16:13.603 3 Level-0 table #41: started
-2023/06/04-11:16:13.609 3 Level-0 table #41: 63774 bytes OK
-2023/06/04-11:16:13.616 3 Delete type=0 #38
-2023/06/04-11:16:24.219 3 Level-0 table #44: started
-2023/06/04-11:16:24.227 3 Level-0 table #44: 177222 bytes OK
-2023/06/04-11:16:24.231 3 Delete type=0 #42
