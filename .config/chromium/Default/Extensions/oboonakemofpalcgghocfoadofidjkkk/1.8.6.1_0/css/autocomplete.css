@@ -1,0 +1,72 @@
+.kpxcAutocomplete-container {
+    display: none;
+    z-index: 2147483646;
+    position: absolute !important;
+    border: var(--kpxc-autocomplete-menu-border);
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    overflow: hidden; /* this fixes an issue with the border radius not showing up clearly */
+}
+
+.kpxcAutocomplete-container-on-top {
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.kpxcAutocomplete-items {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.kpxcAutocomplete-items div {
+    padding: 5px;
+    cursor: pointer;
+    background-color: var(--kpxc-background-color);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    width: auto;
+    color: var(--kpxc-text-color);
+    font-size: max(10px, .9em) !important;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    text-rendering: auto !important;
+    text-align: start !important;
+}
+
+.kpxcAutocomplete-items div:last-child {
+    border-bottom: none;
+}
+
+.kpxcAutocomplete-active {
+    background-color: #28a745 !important;
+    color: #ffffff !important;
+}
+
+.kpxcAutocomplete-container footer {
+    padding: 5px;
+    background-color: #ddd;
+    border-top: 1px solid rgba(0,0,0,.125) !important;
+    width: auto;
+    color: #000;
+    font-size: max(9px, .8em) !important;
+    font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+    .kpxcAutocomplete-container {
+        border: var(--kpxc-autocomplete-menu-border);
+    }
+
+    .kpxcAutocomplete-items {
+        background: var(--kpxc-background-color);
+        color: var(--kpxc-text-color);
+    }
+
+    .kpxc-pwgen-input {
+        background-color: var(--kpxc-input-background-color) !important;
+        border: var(--kpxc-input-border);
+        border-color: var(--kpxc-input-border-color);
+        color: var(--kpxc-text-color) !important;
+    }
+}
