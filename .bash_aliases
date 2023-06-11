@@ -9,3 +9,5 @@ alias pyc='python -m compileall'
 alias cp='cp -i'
 alias rm='rm -i'
 alias mv='mv -i'
+alias emacs="emacsclient -a 'nvim' -c"
+alias vim='nvim'
