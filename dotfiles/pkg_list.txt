@@ -1,0 +1,14 @@
+alacritty
+awesome
+bspwm
+chromium
+emacs-nativecomp
+nano
+neovim
+polybar
+qtile
+shellcheck
+starship
+ttf-hack-nerd
+xmonad
+zram-generator
