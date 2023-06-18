@@ -11,4 +11,3 @@ shellcheck
 starship
 ttf-hack-nerd
 xmonad
-zram-generator
