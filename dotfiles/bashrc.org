@@ -3,6 +3,32 @@
 #+AUTHOR: BastIsAwesome
 
 * Bash Config
+** Exports
+Get proper colours
+
+#+begin_src bash
+export TERM='xterm-256color'
+#+end_src
+
+No duplicate History entries
+
+#+begin_src bash
+HISTCONTROL=ignoredups:erasedups
+#+end_src
+
+Visual and terminal default editors.
+
+#+begin_src bash
+export EDITOR='nvim'
+export VISUAL='emacsclient -a "nvim" -c'
+#+end_src
+
+Use `bat` as manpager
+
+#+begin_src bash
+export MANPAGER='sh -c "col -bx | bat -l man -p"'
+#+end_src
+
 If not running interactively, don't do anything.
 
 #+begin_src bash
@@ -28,8 +54,18 @@ alias mv='mv -i'
 
 Editors
 #+begin_src bash
-alias emacs="emacsclient -a 'nvim' -c"
+alias emacs='emacsclient -a "nvim" -c'
 alias vim='nvim'
+#+end_src
+
+Default command args
+#+begin_src bash
+alias df='df -h'
+alias free='free -h'
+alias psa='ps auxf'
+alias psgrep='ps aux | grep -v grep | grep -i -e VSZ -e'
+alias psmem='ps auxf | sort -nr -k 4'
+alias pscpu='ps auxf | sort -nr -k 3'
 #+end_src
 
 * Git Prompt
@@ -68,15 +104,16 @@ Configure the custom PATH.
 export PATH=$PATH:/home/bast/local/bin:/home/bast/local/opt/bin:/home/bast/.local/bin
 
 if [ -d "$HOME/.config/emacs/bin" ]; then
-	PATH=$PATH:$HOME/.config/emacs/bin
+	PATH="$PATH:$HOME/.config/emacs/bin"
 fi
-#+end_src
 
-* History
-Configure history file.
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
 
-#+begin_src bash
-HISTCONTROL=ignoredups:erasedups
+if [ -d "$HOME/local/bin" ]; then
+    PATH="$HOME/local/bin:$PATH"
+fi
 #+end_src
 
 * Python Virtual Environments
@@ -101,6 +138,52 @@ if hash pipenv 2>/dev/null; then
 fi
 #+end_src
 
+* Shell Options
+1. Automatically CD into a named directory
+2. Autocorrect CD misspellings
+3. Save multi-line commands in history as a single line
+4. Enable globs
+5. Do not overwrite history
+6. Expand aliases
+7. Checks terminal size when bash regains control
+
+#+begin_src bash
+shopt -s autocd
+shopt -s cdspell
+shopt -s cmdhist
+shopt -s dotglob
+shopt -s histappend
+shopt -s expand_aliases
+shopt -s checkwinsize
+#+end_src
+
+* Archive Extraction
+#+begin_src bash
+# Usage: ex <file>
+ex() {
+    if [ -f "$1" ]; then
+        case $1 in
+            ,*.tar.bz2)  tar xjf $1      ;;
+            ,*.tar.gz)   tar xzf $1      ;;
+            ,*.bz2)      bunzip2 $1      ;;
+            ,*.rar)      unrar x $1      ;;
+            ,*.gz)       gunzip $1       ;;
+            ,*.tar)      tar xf $1       ;;
+            ,*.tbz2)     tar xjf $1      ;;
+            ,*.tgz)      tar xzf $1      ;;
+            ,*.zip)      unzip $1        ;;
+            ,*.Z)        uncompress $1   ;;
+            ,*.7z)       7z x $1         ;;
+            ,*.deb)      ar x $1         ;;
+            ,*.tar.xz)   tar xf $1       ;;
+            ,*.tar.zst)  unzstd $1       ;;
+            ,*)          echo "'$1' cannot be extracted via ex()";;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+#+end_src
 
 * Dotbare
 Configure Dotbare.

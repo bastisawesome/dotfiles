@@ -1,3 +1,12 @@
+export TERM='xterm-256color'
+
+HISTCONTROL=ignoredups:erasedups
+
+export EDITOR='nvim'
+export VISUAL='emacsclient -a "nvim" -c'
+
+export MANPAGER='sh -c "col -bx | bat -l man -p"'
+
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
@@ -11,8 +20,15 @@ alias cp='cp -i'
 alias rm='rm -i'
 alias mv='mv -i'
 
-alias emacs="emacsclient -a 'nvim' -c"
+alias emacs='emacsclient -a "nvim" -c'
 alias vim='nvim'
+
+alias df='df -h'
+alias free='free -h'
+alias psa='ps auxf'
+alias psgrep='ps aux | grep -v grep | grep -i -e VSZ -e'
+alias psmem='ps auxf | sort -nr -k 4'
+alias pscpu='ps auxf | sort -nr -k 3'
 
 # source /usr/share/git/completion/git-prompt.sh
 # GIT_PROMPT_ENABLED=true
@@ -31,10 +47,16 @@ fi
 export PATH=$PATH:/home/bast/local/bin:/home/bast/local/opt/bin:/home/bast/.local/bin
 
 if [ -d "$HOME/.config/emacs/bin" ]; then
-	PATH=$PATH:$HOME/.config/emacs/bin
+	PATH="$PATH:$HOME/.config/emacs/bin"
 fi
 
-HISTCONTROL=ignoredups:erasedups
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/local/bin" ]; then
+    PATH="$HOME/local/bin:$PATH"
+fi
 
 #export WORKON_HOME=~/.virtualenvs
 #source /usr/bin/virtualenvwrapper.sh
@@ -46,5 +68,38 @@ fi
 if hash pipenv 2>/dev/null; then
     eval  "$(_PIPENV_COMPLETE=bash_source pipenv)"
 fi
+
+shopt -s autocd
+shopt -s cdspell
+shopt -s cmdhist
+shopt -s dotglob
+shopt -s histappend
+shopt -s expand_aliases
+shopt -s checkwinsize
+
+# Usage: ex <file>
+ex() {
+    if [ -f "$1" ]; then
+        case $1 in
+            *.tar.bz2)  tar xjf $1      ;;
+            *.tar.gz)   tar xzf $1      ;;
+            *.bz2)      bunzip2 $1      ;;
+            *.rar)      unrar x $1      ;;
+            *.gz)       gunzip $1       ;;
+            *.tar)      tar xf $1       ;;
+            *.tbz2)     tar xjf $1      ;;
+            *.tgz)      tar xzf $1      ;;
+            *.zip)      unzip $1        ;;
+            *.Z)        uncompress $1   ;;
+            *.7z)       7z x $1         ;;
+            *.deb)      ar x $1         ;;
+            *.tar.xz)   tar xf $1       ;;
+            *.tar.zst)  unzstd $1       ;;
+            *)          echo "'$1' cannot be extracted via ex()";;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
 
 export DOTBARE_DIR=dotfiles
