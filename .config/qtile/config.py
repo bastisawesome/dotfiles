@@ -23,6 +23,7 @@ from typing import Any
 
 mod = "mod4"
 terminal = 'alacritty'
+editor = 'emacsclient -a "nvim" -c'
 
 #***************
 # Lazy Functions
@@ -54,7 +55,6 @@ groups: list[Group] = [
 # Keybindings
 #************
 
-# Temporary shortcuts to make QTile usable again. K. Thx.
 modifier_keys = {
     'M': 'mod4',        # Super
     'A': 'mod1',        # Alt
@@ -63,10 +63,47 @@ modifier_keys = {
 }
 
 keys = [
-    Key('M-C-r', lazy.reload_config()),
-    Key('M-r', lazy.spawncmd()),
-    Key('M-<space>', lazy.spawn(guess_terminal()))
+    # General Qtile Bindings
+    Key('M-r', lazy.reload_config()),
+    Key('M-C-r', lazy.restart_qtile()),
+    Key('M-<Return>', lazy.spawncmd()),
+    Key('M-<space>', lazy.spawn(guess_terminal())),
+
+    # Window Management Bindings
+    ## Move between windows
+    Key('M-h', lazy.layout.left()),
+    Key('M-j', lazy.layout.down()),
+    Key('M-k', lazy.layout.up()),
+    Key('M-l', lazy.layout.right()),
+
+    ## Move Windows around
+    Key('M-S-h', lazy.layout.shuffle_left()),
+    Key('M-S-j', lazy.layout.shuffle_down()),
+    Key('M-S-k', lazy.layout.shuffle_up()),
+    Key('M-S-l', lazy.layout.shuffle_right()),
+
+    ## Grow/Shrink Windows
+    Key('M-C-h', lazy.layout.grow_left()),
+    Key('M-C-j', lazy.layout.grow_up()),
+    Key('M-C-k', lazy.layout.grow_down()),
+    Key('M-C-l', lazy.layout.grow_right()),
+
+    ## Cycle through layouts
+    Key('M-<Tab>', lazy.layout.next_layout()),
+    Key('M-S-<Tab>', lazy.layout.prev_layout()),
+
+    # Emacs
+    Key('M-e', lazy.spawn(editor)),
 ]
+
+# Group keybindings
+for i in groups:
+    keys.extend(
+        [
+            Key(f'M-{i.name}', lazy.group[i.name].toscreen()),
+            Key(f'M-S-{i.name}', lazy.window.togroup(i.name, switch_group=True))
+        ]
+    )
 
 #********
 # Layouts
@@ -149,7 +186,7 @@ dgroups_app_rules: list[Any] = []
 extension_defaults = dict(font='sans', fontsize=12, padding=2)
 
 # Default floating window layout
-floating_layout = floating_layout = layout.Floating(
+floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
