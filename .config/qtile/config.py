@@ -65,7 +65,7 @@ modifier_keys = {
 keys = [
     # General Qtile Bindings
     Key('M-r', lazy.reload_config()),
-    Key('M-C-r', lazy.restart_qtile()),
+    Key('M-C-r', lazy.restart()),
     Key('M-<Return>', lazy.spawncmd()),
     Key('M-<space>', lazy.spawn(guess_terminal())),
 
