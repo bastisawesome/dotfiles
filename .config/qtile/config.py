@@ -1,3 +1,4 @@
+# TODO: Add more matches to 'WWW' Group for all web browsers
 import autostart
 import copy
 from libqtile import (
@@ -7,6 +8,7 @@ from libqtile import (
 )
 from libqtile.config import (
     EzKey as Key,
+    Group,
     Match,
     Screen,
 )
@@ -29,6 +31,24 @@ terminal = 'alacritty'
 #*******
 # Groups
 #*******
+
+groups: list[Group] = [
+    Group(
+        '1',
+        label='GEN'
+    ),
+    Group(
+        '2',
+        label='WWW',
+        matches=[
+            Match(wm_class=['Chromium'])
+        ]
+    ),
+    Group(
+        '3',
+        label='DEV'
+    )
+]
 
 #************
 # Keybindings
