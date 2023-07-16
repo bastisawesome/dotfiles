@@ -1,21 +1,52 @@
 import autostart
-from libqtile import layout
-from libqtile.config import Match
+import copy
+from libqtile import (
+    bar,
+    layout,
+    widget,
+)
+from libqtile.config import (
+    EzKey as Key,
+    Match,
+    Screen,
+)
+from libqtile.lazy import lazy
+from libqtile.utils import guess_terminal
 from typing import Any
+
 
 #************************
 # Configuration Variables
 #************************
+
 mod = "mod4"
 terminal = 'alacritty'
 
-#*************
-# Lazy Objects
-#*************
+#***************
+# Lazy Functions
+#***************
+
+#*******
+# Groups
+#*******
 
 #************
 # Keybindings
 #************
+
+# Temporary shortcuts to make QTile usable again. K. Thx.
+modifier_keys = {
+    'M': 'mod4',        # Super
+    'A': 'mod1',        # Alt
+    'S': 'shift',       # Shift
+    'C': 'control',     # Control
+}
+
+keys = [
+    Key('M-C-r', lazy.reload_config()),
+    Key('M-r', lazy.spawncmd()),
+    Key('M-<space>', lazy.spawn(guess_terminal()))
+]
 
 #********
 # Layouts
@@ -29,6 +60,48 @@ terminal = 'alacritty'
 # Screens
 #********
 
+customBar = bar.Bar(
+    [
+        widget.GroupBox(),
+        widget.CurrentLayoutIcon(),
+        widget.WindowName(),
+        widget.Prompt(),
+        widget.Spacer(bar.STRETCH),
+        widget.StatusNotifier(),
+        widget.Volume(
+            emoji=True
+        ),
+        widget.Clock(format='%H:%M %d/%m/%Y'),
+        widget.Spacer(10)
+    ],
+    size=30
+)
+
+customBar2 = bar.Bar(
+    [
+        widget.GroupBox(),
+        widget.CurrentLayoutIcon(),
+        widget.WindowName(),
+        widget.Prompt(),
+        widget.Spacer(bar.STRETCH),
+        widget.StatusNotifier(),
+        widget.Volume(
+            emoji=True
+        ),
+        widget.Clock(format='%H:%M %d/%m/%Y'),
+        widget.Spacer(10)
+    ],
+    size=30
+)
+
+screens = [
+    Screen(
+        top = customBar
+    ),
+    Screen(
+        top = customBar2
+    )
+]
 #******
 # Hooks
 #******
