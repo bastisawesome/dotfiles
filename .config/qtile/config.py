@@ -133,7 +133,12 @@ def init_widgets() :
         widget.Prompt(),
         widget.Spacer(bar.STRETCH),
         widget.StatusNotifier(),
-        widget.Volume(emoji=True),
+        widget.Volume(
+            emoji=True,
+        ),
+        widget.Volume(
+            fmt='{}'
+        ),
         widget.Clock(format='%H:%M %d/%m/%Y'),
         widget.Spacer(10),
     ]
