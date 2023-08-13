@@ -42,7 +42,8 @@ groups: list[Group] = [
         '2',
         label='WWW',
         matches=[
-            Match(wm_class=['Chromium'])
+            Match(wm_class='Chromium'),
+            Match(wm_class='Firefox')
         ]
     ),
     Group(
@@ -94,6 +95,8 @@ keys = [
 
     # Emacs
     Key('M-e', lazy.spawn(editor)),
+
+    Key('M-w', lazy.window.kill())
 ]
 
 # Group keybindings
@@ -117,48 +120,69 @@ for i in groups:
 # Screens
 #********
 
-customBar = bar.Bar(
-    [
-        widget.GroupBox(),
-        widget.CurrentLayoutIcon(),
-        widget.WindowName(),
-        widget.Prompt(),
-        widget.Spacer(bar.STRETCH),
-        widget.StatusNotifier(),
-        widget.Volume(
-            emoji=True
-        ),
-        widget.Clock(format='%H:%M %d/%m/%Y'),
-        widget.Spacer(10)
-    ],
-    size=30
-)
+# customBar = bar.Bar(
+#     [
+#         widget.GroupBox(),
+#         widget.CurrentLayoutIcon(),
+#         widget.WindowName(),
+#         widget.Prompt(),
+#         widget.Spacer(bar.STRETCH),
+#         widget.StatusNotifier(),
+#         widget.Volume(
+#             emoji=True
+#         ),
+#         widget.Clock(format='%H:%M %d/%m/%Y'),
+#         widget.Spacer(10)
+#     ],
+#     size=30
+# )
 
-customBar2 = bar.Bar(
-    [
+# customBar2 = bar.Bar(
+#     [
+#         widget.GroupBox(),
+#         widget.CurrentLayoutIcon(),
+#         widget.WindowName(),
+#         widget.Prompt(),
+#         widget.Spacer(bar.STRETCH),
+#         widget.StatusNotifier(),
+#         widget.Volume(
+#             emoji=True
+#         ),
+#         widget.Clock(format='%H:%M %d/%m/%Y'),
+#         widget.Spacer(10)
+#     ],
+#     size=30
+# )
+
+def init_widgets() :
+    widget_list = [
+        widget.Image(
+            filename='~/.config/qtile/icons/qtile_logo.png',
+            scale=True,
+        ),
         widget.GroupBox(),
         widget.CurrentLayoutIcon(),
+        widget.CurrentLayout(),
         widget.WindowName(),
         widget.Prompt(),
         widget.Spacer(bar.STRETCH),
         widget.StatusNotifier(),
-        widget.Volume(
-            emoji=True
-        ),
+        widget.Volume(emoji=True),
         widget.Clock(format='%H:%M %d/%m/%Y'),
-        widget.Spacer(10)
-    ],
-    size=30
-)
+        widget.Spacer(10),
+    ]
+
+    return widget_list
 
 screens = [
     Screen(
-        top = customBar
+        top = bar.Bar(widgets=init_widgets(), size=30)
     ),
     Screen(
-        top = customBar2
+        top = bar.Bar(widgets=init_widgets(), size=30)
     )
 ]
+
 #******
 # Hooks
 #******
