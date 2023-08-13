@@ -120,40 +120,6 @@ for i in groups:
 # Screens
 #********
 
-# customBar = bar.Bar(
-#     [
-#         widget.GroupBox(),
-#         widget.CurrentLayoutIcon(),
-#         widget.WindowName(),
-#         widget.Prompt(),
-#         widget.Spacer(bar.STRETCH),
-#         widget.StatusNotifier(),
-#         widget.Volume(
-#             emoji=True
-#         ),
-#         widget.Clock(format='%H:%M %d/%m/%Y'),
-#         widget.Spacer(10)
-#     ],
-#     size=30
-# )
-
-# customBar2 = bar.Bar(
-#     [
-#         widget.GroupBox(),
-#         widget.CurrentLayoutIcon(),
-#         widget.WindowName(),
-#         widget.Prompt(),
-#         widget.Spacer(bar.STRETCH),
-#         widget.StatusNotifier(),
-#         widget.Volume(
-#             emoji=True
-#         ),
-#         widget.Clock(format='%H:%M %d/%m/%Y'),
-#         widget.Spacer(10)
-#     ],
-#     size=30
-# )
-
 def init_widgets() :
     widget_list = [
         widget.Image(
