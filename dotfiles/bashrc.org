@@ -2,6 +2,19 @@
 #+PROPERTY: header-args :tangle ~/.bashrc
 #+AUTHOR: BastIsAwesome
 
+* TABLE OF CONTENTS :toc:
+- [[#bash-config][Bash Config]]
+  - [[#exports][Exports]]
+- [[#aliases][Aliases]]
+- [[#git-prompt][Git Prompt]]
+- [[#prompt][Prompt]]
+  - [[#starship][Starship]]
+- [[#path][Path]]
+- [[#python-virtual-environments][Python Virtual Environments]]
+- [[#shell-options][Shell Options]]
+- [[#archive-extraction][Archive Extraction]]
+- [[#dotbare][Dotbare]]
+
 * Bash Config
 ** Exports
 Get proper colours
