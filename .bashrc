@@ -5,6 +5,8 @@ HISTCONTROL=ignoredups:erasedups
 export EDITOR='nvim'
 export VISUAL='emacsclient -a "nvim" -c'
 
+# Fix bug with Bat
+export MANROFFOPT="-c"
 export MANPAGER='sh -c "col -bx | bat -l man -p"'
 
 [[ $- != *i* ]] && return

@@ -26,6 +26,8 @@ export VISUAL='emacsclient -a "nvim" -c'
 Use `bat` as manpager
 
 #+begin_src bash
+# Fix bug with Bat
+export MANROFFOPT="-c"
 export MANPAGER='sh -c "col -bx | bat -l man -p"'
 #+end_src
 
