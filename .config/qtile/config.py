@@ -96,7 +96,9 @@ keys = [
     # Emacs
     Key('M-e', lazy.spawn(editor)),
 
-    Key('M-w', lazy.window.kill())
+    Key('M-w', lazy.window.kill()),
+    Key('M-f', lazy.window.toggle_floating()),
+    Key('M-S-f', lazy.window.toggle_fullscreen())
 ]
 
 # Group keybindings
