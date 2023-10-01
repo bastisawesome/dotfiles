@@ -105,4 +105,3 @@ ex() {
 }
 
 export DOTBARE_DIR=dotfiles
-source ~/dotfiles/dotbarsource ~/dotfiles/dotbare.sh
