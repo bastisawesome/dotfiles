@@ -84,10 +84,16 @@ keys = [
     Key('M-S-l', lazy.layout.shuffle_right()),
 
     ## Grow/Shrink Windows
-    Key('M-C-h', lazy.layout.grow_left()),
+    Key('M-C-h',
+        lazy.layout.grow_left().when(layout=['columns']),
+        lazy.layout.shrink().when(layout=['monadtall']),
+    ),
     Key('M-C-j', lazy.layout.grow_up()),
     Key('M-C-k', lazy.layout.grow_down()),
-    Key('M-C-l', lazy.layout.grow_right()),
+    Key('M-C-l',
+        lazy.layout.grow_right().when(layout=['columns']),
+        lazy.layout.grow().when(layout=['monadtall'])
+    ),
 
     ## Cycle through layouts
     Key('M-<Tab>', lazy.layout.next_layout()),
@@ -113,7 +119,23 @@ for i in groups:
 #********
 # Layouts
 #********
+MARGIN = 10
 
+layouts = [
+    layout.MonadTall(
+        align=layout.MonadTall._left,
+        margin=MARGIN,
+        ratio=0.5,
+        single_border_width=0,
+    ),
+    layout.Columns(
+        margin=MARGIN,
+        split=True,
+        num_columns=3,
+        single_border_width=0,
+    ),
+    layout.Max(),
+]
 #******
 # Mouse
 #******
@@ -149,10 +171,10 @@ def init_widgets() :
 
 screens = [
     Screen(
-        top = bar.Bar(widgets=init_widgets(), size=30)
+        top = bar.Bar(background="#00ff00", widgets=init_widgets(), size=30)
     ),
     Screen(
-        top = bar.Bar(widgets=init_widgets(), size=30)
+        top = bar.Bar(background="#00ff00", widgets=init_widgets(), size=30)
     )
 ]
 
