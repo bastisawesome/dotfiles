@@ -24,6 +24,7 @@ from typing import Any
 mod = "mod4"
 terminal = 'alacritty'
 editor = 'emacsclient -a "nvim" -c'
+browser = 'librewolf'
 
 #***************
 # Lazy Functions
@@ -42,8 +43,10 @@ groups: list[Group] = [
         '2',
         label='WWW',
         matches=[
-            Match(wm_class='Chromium'),
-            Match(wm_class='Firefox')
+            Match(wm_class='chromium'),
+            Match(wm_class='Firefox'),
+            Match(wm_class='brave-browser'),
+            Match(wm_class='LibreWolf'),
         ]
     ),
     Group(
@@ -66,9 +69,11 @@ modifier_keys = {
 keys = [
     # General Qtile Bindings
     Key('M-r', lazy.reload_config()),
+    Key('M-q', lazy.shutdown()),
     Key('M-C-r', lazy.restart()),
     Key('M-<Return>', lazy.spawncmd()),
     Key('M-<space>', lazy.spawn(guess_terminal())),
+    Key('M-b', lazy.spawn(browser)),
 
     # Window Management Bindings
     ## Move between windows
@@ -171,10 +176,10 @@ def init_widgets() :
 
 screens = [
     Screen(
-        top = bar.Bar(background="#00ff00", widgets=init_widgets(), size=30)
+        top = bar.Bar(widgets=init_widgets(), size=30)
     ),
     Screen(
-        top = bar.Bar(background="#00ff00", widgets=init_widgets(), size=30)
+        top = bar.Bar(widgets=init_widgets(), size=30)
     )
 ]
 
@@ -193,7 +198,7 @@ auto_fullscreen = True
 bring_front_click = 'floating_only'
 
 # Disable cursor following the active window
-cursor_warp = False
+cursor_warp = True 
 
 # Do not create group binding hotkeys
 dgroups_key_binder = None
